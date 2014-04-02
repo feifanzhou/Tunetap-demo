@@ -1,0 +1,26 @@
+.EventBanner {
+  background: image-url('geazy2.jpg') no-repeat;
+  background-position: 0 -40px;
+  background-size: 100%;
+  border-radius: 4px;
+  color: white;
+  margin: 1em 0;
+  overflow: hidden;
+  padding: 1em;
+  .EventDetailsBackground {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 25%;
+    top: 0;
+  }
+  .EventDetailsBlur {
+    background: image-url('geazy2.jpg') no-repeat;
+    background-position: 0 -40px;
+    background-size: 133.333333333%;
+    @include vendor-prefix(filter, 'blur(1px)');
+  }
+  .EventDetailsDarken {
+    background: transparentize(black, 0.85); // TODO: Use gradient
+  }
+}
