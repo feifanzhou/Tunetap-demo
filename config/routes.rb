@@ -6,6 +6,7 @@ TunetapDemo::Application.routes.draw do
   root 'root#index'
 
   get '/:path' => 'root#index'
+  match '*path' => 'root#index', via: :get  # Route all to root
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

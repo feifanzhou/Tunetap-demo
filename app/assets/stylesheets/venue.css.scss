@@ -22,6 +22,12 @@
     @include vendor-prefix(filter, 'blur(1px)');
   }
   .EventDetailsDarken {
-    background: transparentize(black, 0.85); // TODO: Use gradient
+    background: -moz-linear-gradient(left, rgba(14,14,14,0.8) 20%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%,rgba(14,14,14,0.8)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(14,14,14,0.8) 20%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(14,14,14,0.8) 20%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(14,14,14,0.8) 20%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(14,14,14,0.8) 20%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0e0e0e', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
   }
 }

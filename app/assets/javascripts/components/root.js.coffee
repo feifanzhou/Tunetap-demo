@@ -1,5 +1,4 @@
-window.TD or= {}
-TD.Root = React.createClass
+Reaction.Root = React.createClass
   render: ->
     React.DOM.div
       className: 'container'
@@ -18,24 +17,25 @@ TD.Root = React.createClass
             React.DOM.div
               className: 'col-sm-4'
               children: 
-                React.DOM.button
+                React.DOM.a
                   className: 'btn btn-default col-sm-10 col-sm-offset-1'
                   children: 'Fan'
-                  onClick: @props.render_fan
+                  roll: 'button'
             React.DOM.div
               className: 'col-sm-4'
               children: 
-                React.DOM.button
+                React.DOM.a
                   className: 'btn btn-default col-sm-10 col-sm-offset-1'
                   children: 'Artist'
-                  onClick: @props.render_artist
+                  roll: 'button'
             React.DOM.div
               className: 'col-sm-4'
               children: 
-                React.DOM.button
+                React.DOM.a
                   className: 'btn btn-default col-sm-10 col-sm-offset-1'
                   children: 'Venue'
-                  onClick: @props.render_venue
+                  href: '/venue'
+                  roll: 'button'
           ]
       ]
 TD.FanRoot = React.createClass

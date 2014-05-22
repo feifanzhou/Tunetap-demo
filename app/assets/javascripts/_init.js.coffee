@@ -8,9 +8,11 @@ render_artist = ->
   window.history.pushState({}, "Artist Demo | Tunetap", '/artist')
   render('artist')
 render_venue = ->
+  console.log('Render venue')
   window.history.pushState({}, "Venue Demo | Tunetap", '/venue')
   render('venue')
 render = (arg) ->
+  console.log('Render: ' + arg)
   target = document.getElementById('content')
   role_children = { render_fan: render_fan, render_artist: render_artist, render_venue: render_venue }
   if arg == 'root'
@@ -31,3 +33,11 @@ if pathname.length < 1
 else if pathname == 'fan' || pathname == 'artist' || pathname == 'venue'
   render(pathname)
 else render_404()
+popped = ('state' in window.history)
+initialURL = location.href
+$(window).bind('popstate', (event) ->
+  initialPop = !popped && location.href == initialURL
+  popped = true
+  return if initialPop
+  render('root')
+)

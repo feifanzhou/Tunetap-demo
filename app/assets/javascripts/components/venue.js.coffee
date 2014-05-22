@@ -36,7 +36,19 @@ TD.VenueTonight = React.createClass
         TD.VenueEventBanner()
         TD.VenueEventBanner()
       ]
-TD.VenueRoot = React.createClass
+TD.VenueUpcoming = React.createClass
+  render: ->
+    React.DOM.p
+      children: 'Venue upcoming'
+TD.VenueRequests = React.createClass
+  render: ->
+    React.DOM.p
+      children: 'Venue Requests'
+TD.VenueSettings = React.createClass
+  render: ->
+    React.DOM.p
+      children: 'Settings'
+Reaction.VenueRoot = React.createClass
   render: ->
     React.DOM.div
       className: 'container'
@@ -62,9 +74,11 @@ TD.VenueRoot = React.createClass
                     React.DOM.p
                       id: 'venueAddress'
                       children: [
-                        '325 College Ave'
-                        React.DOM.br
-                        'Ithaca, NY 14853'
+                        React.DOM.span
+                          children: '325 College Ave'
+                        React.DOM.br(null)
+                        React.DOM.span
+                          children: 'Ithaca, NY 14853'
                       ]
                   ]
                 React.DOM.div
@@ -85,7 +99,9 @@ TD.VenueRoot = React.createClass
                     React.DOM.a
                       className: 'list-group-item'
                       children: 'Upcoming'
-                      href: '#'
+                      href: '#upcoming'
+                      onClick: ->
+                        React.renderComponent(TD.VenueUpcoming(), document.getElementById('venueDetails'))
                     React.DOM.a
                       className: 'list-group-item'
                       children: [
@@ -95,11 +111,15 @@ TD.VenueRoot = React.createClass
                         React.DOM.span
                           children: 'Requests'
                       ]
-                      href: '#'
+                      href: '#equests'
+                      onClick: ->
+                        React.renderComponent(TD.VenueRequests(), document.getElementById('venueDetails'))
                     React.DOM.a
                       className: 'list-group-item'
                       children: 'Settings'
                       href: '#'
+                      onClick: ->
+                        React.renderComponent(TD.VenueSettings(), document.getElementById('venueDetails'))
                   ]
               ]
             React.DOM.div
