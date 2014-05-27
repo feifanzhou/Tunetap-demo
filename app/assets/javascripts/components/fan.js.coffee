@@ -147,6 +147,8 @@ Reaction.FanRoot = React.createClass
 navWidth = false
 top = false  # Position of content from top of page
 scrollAffix = ->
+  tapThatBlock = document.getElementById('tapThatBlock')
+  return if !tapThatBlock || typeof tapThatBlock == 'undefined'
   tapThatBlockHeight = document.getElementById('tapThatBlock').offsetHeight
   scrollTop = document.documentElement.scrollTop || document.body.scrollTop
   return if scrollTop < tapThatBlock  # Don't bother if not scrolled far enough
