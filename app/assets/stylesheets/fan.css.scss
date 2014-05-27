@@ -1,0 +1,131 @@
+@import 'shared';
+
+body {
+  @include background-image-retina('brushed', 'png', 114, 114);
+}
+#demoDisclaimer {
+  color: $orange;
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.15em;
+  margin: 0.5em auto;
+}
+#tapThatBlock {
+  background: image-url('geazy2-dark-blur.jpg') no-repeat;
+  background-position: 100% 15%;
+  @include vendor-prefix(background-size, cover);
+  color: white;
+  font-weight: 300;
+  margin-bottom: 0;
+  .TapFormPrompt {
+    font-size: 3em;
+    @media #{ $media-md } {
+      font-size: 4em;
+    }
+    @media #{ $media-lg } {
+      font-size: 5em;
+    }
+    padding: 0.35em;
+  }
+  .form-control {
+    background: transparentize(black, 0.5);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 400;
+    padding: 1.25em 0.25em;
+    position: relative;
+    top: -0.5em;
+    width: 30%;
+  }
+  #tapButton {
+    font-weight: 600;
+    margin-left: 0.5em;
+    padding: 1em;
+    position: relative;
+    top: -0.8em;
+  }
+}
+#browseEvents {
+  background: white;
+  border: 1px solid darken(#EEE, 8%);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+  #browseNavigator {
+    .NavigatorSection {
+      border-bottom: 1px solid white;
+      &:last-child {
+        border-bottom: none;
+      }
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      @include vendor-prefix(background-size, cover);
+      padding: 4em 0 0 0;
+      &:hover {
+        cursor: pointer;
+      }
+      p {
+        background: transparentize(black, 0.5);
+        background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(9,9,9,0.5) 50%, rgba(14,14,14,0.5) 80%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(50%,rgba(9,9,9,0.5)), color-stop(80%,rgba(14,14,14,0.5))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(9,9,9,0.5) 50%,rgba(14,14,14,0.5) 80%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(9,9,9,0.5) 50%,rgba(14,14,14,0.5) 80%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(9,9,9,0.5) 50%,rgba(14,14,14,0.5) 80%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(9,9,9,0.5) 50%,rgba(14,14,14,0.5) 80%); /* W3C */
+        color: white;
+        font-size: 1em;
+        @media #{ $media-xxs } {
+          font-size: 0.65em;
+        }
+        @media #{ $media-xs } {
+          font-size: 0.75em;
+        }
+        @media #{ $media-sm } {
+          font-size: 1em;
+        }
+        margin: 0;
+        padding: 1.25em 0 0.75em 0;
+        text-align: center;
+      }
+      &#navigatorSearchForm {
+        background: image-url('blur0_d.jpg');
+        @include vendor-prefix(transition, 'background-image 0.5s');
+        padding: 0.5em;
+        &.Selected, &:hover {
+          background-image: image-url('blur0.jpg');
+        }
+      }
+      &#eventsOnTap {
+        background: image-url('blur1_d.jpg') center center;
+        @include vendor-prefix(transition, 'background-image 0.5s');
+        &.Selected, &:hover {
+          background-image: image-url('blur1.jpg');
+        }
+      }
+      &#confirmedEvents {
+        background: image-url('blur2_d.jpg') center center; 
+        @include vendor-prefix(transition, 'background-image 0.5s');
+        &.Selected, &:hover {
+          background-image: image-url('blur2.jpg');
+        }
+      }
+      &#featuredArtists {
+        background: image-url('blur3_d.png') center center;
+        @include vendor-prefix(transition, 'background-image 0.5s');
+        &.Selected, &:hover {
+          background-image: image-url('blur3.png');
+        }
+      }
+      &#friends {
+        background: image-url('blur4_d.png') center center;
+        @include vendor-prefix(transition, 'background-image 0.5s');
+        &.Selected, &:hover {
+          background-image: image-url('blur4.png');
+        }
+      }
+    }
+  }
+}
