@@ -35,33 +35,71 @@ $media-lg: 'only screen and (min-width: 1200px)';
   }
 }
 
-.ArtistCard {
-  .ArtistCardContent {
+.progress {
+  border-radius: 0.3em;
+  height: 0.6em;
+}
+
+@mixin DemoCard {
+  .DemoCardContent {
     border: 1px solid #DDD;
     border-radius: 4px;
     box-shadow: 0 0 1px 1px transparentize(#DDD, 0.5);
     margin: 1em auto;
     overflow: hidden;
-    .ArtistCardPhoto {
+    .DemoCardPhoto {
       background-size: cover;
       display: block;
       padding-bottom: 100%; // 100% rel to width — forces square
       width: 100%;
     }
-    .ArtistCardBody {
+    .DemoCardBody {
       padding: 0.75em;
-      .ArtistCardName {
+      .DemoCardName {
         font-size: 1.2em;
         font-weight: 600;
         margin: 0.25em 0;
       }
       .btn {
         display: block;
+        margin: 0.5em 0;
         width: 100%;
-        &.ArtistCardMoreButton {
-          margin: 0.5em 0;
+        &.btn-primary {
+          margin-bottom: 0;
         }
       }
     }
+  }
+}
+.ArtistCard {
+  @include DemoCard;
+}
+.EventCard {
+  @include DemoCard;
+  .EventCardFriendsGoing {
+    overflow: hidden;
+    padding: 0 0.75em;
+    .ProfilePictureSmall {
+      padding: 0 0.15em;
+    }
+    .FriendGoingMoreCount {
+      background: darken(#EEE, 10%);
+      border-radius: 2px;
+      // http://stackoverflow.com/a/19695851/472768
+      font-size: 0.85em;
+      font-weight: 700;
+      line-height: 1em;
+      margin-bottom: -999px;
+      overflow: hidden;
+      padding: 0.55em 0.15em 999px;
+      text-align: center;
+    }
+  }
+  .EventCardPeopleCount {
+    margin-top: 0.35em;
+  }
+  .EventCardLocation {
+    font-weight: 700;
+    margin: 1em 0 0;
   }
 }

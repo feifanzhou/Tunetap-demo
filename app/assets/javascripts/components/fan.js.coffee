@@ -9,6 +9,28 @@ logic = { name: 'Logic', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hpho
 kings = { name: 'Kings of the City', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1012372_10151668216408584_253838762_n.jpg', tapCount: 63 }
 artists = [dylan, reef, blau, kings]
 
+e1 = {
+  name: 'Graduation recital'
+  coverPhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/10297904_10203623291284840_5421412255088603739_n.jpg'
+  progress: 89.89
+  friends: [4028, 382, 2389, 235, 988]
+  moreFriends: 42
+  peopleCount: 337
+  location: '57 Water Way'
+  time: 'Next Thursday, 7pm'
+}
+e2 = {
+  name: 'Live at The Gates'
+  coverPhoto: 'http://www.wallsave.com/wallpapers/1920x1080/skate/1018922/skate-music-concert-noise-jpg-1018922.jpg'
+  progress: 55.0
+  friends: [293, 85, 998, 50, 2983]
+  moreFriends: 14
+  peopleCount: 83
+  location: 'The Gates'
+  time: 'Next Friday, 10pm'
+}
+events = [e1, e2]
+
 demoString = 'This is an interactive demo. '
 if Util.hasLocalStorage()
   demoString += 'Your changes will be saved, but they will not be reflected on the live site.'
@@ -17,8 +39,12 @@ else
 
 TD.EventsOnTap = React.createClass
   render: ->
-    React.DOM.p
-      children: 'On tap'
+    React.DOM.div
+      className: 'row'
+      id: 'eventsOnTapContainer'
+      children: events.map( (event) ->
+        return TD.EventCard({ event: event })
+      )
 TD.FeaturedArtists = React.createClass
   render: ->
     React.DOM.div
@@ -143,7 +169,7 @@ TD.BrowseEvents = React.createClass
 
 Reaction.FanRoot = React.createClass
   getInitialState: ->
-    return { nav: 'feat' }
+    return { nav: 'ontap' }
   switchSections: (target) ->
     @setState({ nav: target })
   render: ->
