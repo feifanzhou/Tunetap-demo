@@ -20,6 +20,7 @@ Reaction.Root = React.createClass
                 React.DOM.a
                   className: 'btn btn-default col-sm-10 col-sm-offset-1'
                   children: 'Fan'
+                  href: '/fan'
                   roll: 'button'
             React.DOM.div
               className: 'col-sm-4'
@@ -38,11 +39,3 @@ Reaction.Root = React.createClass
                   roll: 'button'
           ]
       ]
-TD.FanRoot = React.createClass
-  render: ->
-    React.DOM.p
-      children: 'Fan root'
-TD.ArtistRoot = React.createClass
-  render: ->
-    React.DOM.p
-      children: 'Artist root'
