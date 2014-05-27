@@ -34,3 +34,34 @@ $media-lg: 'only screen and (min-width: 1200px)';
     }
   }
 }
+
+.ArtistCard {
+  .ArtistCardContent {
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    box-shadow: 0 0 1px 1px transparentize(#DDD, 0.5);
+    margin: 1em auto;
+    overflow: hidden;
+    .ArtistCardPhoto {
+      background-size: cover;
+      display: block;
+      padding-bottom: 100%; // 100% rel to width — forces square
+      width: 100%;
+    }
+    .ArtistCardBody {
+      padding: 0.75em;
+      .ArtistCardName {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 0.25em 0;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        &.ArtistCardMoreButton {
+          margin: 0.5em 0;
+        }
+      }
+    }
+  }
+}
