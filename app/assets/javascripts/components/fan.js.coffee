@@ -7,7 +7,7 @@ skizzy = { name: 'Skizzy Mars', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.n
 blau = { name: '3LAU', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1621926_657666347612609_903799826_n.jpg', tapCount: 524 }
 logic = { name: 'Logic', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/532803_470548606304111_1258950956_n.jpg', tapCount: 498 }
 kings = { name: 'Kings of the City', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1012372_10151668216408584_253838762_n.jpg', tapCount: 63 }
-artists = [dylan, reef, astrid, skizzy, blau, logic, kings]
+artists = [dylan, reef, blau, kings]
 
 demoString = 'This is an interactive demo. '
 if Util.hasLocalStorage()
@@ -15,6 +15,10 @@ if Util.hasLocalStorage()
 else 
   demoString += "Your changes will not be saved because your browser doesn't support saving changes."
 
+TD.EventsOnTap = React.createClass
+  render: ->
+    React.DOM.p
+      children: 'On tap'
 TD.FeaturedArtists = React.createClass
   render: ->
     React.DOM.div
@@ -71,6 +75,9 @@ TD.TapThat = React.createClass
                       children: 'Go!'
                   ]
 TD.BrowseEvents = React.createClass
+  navigate: (event) ->
+    target = event.target.getAttribute('data-target')
+    @props.navigate(target)
   render: ->
     React.DOM.section
       className: 'col-xs-12'
@@ -96,25 +103,29 @@ TD.BrowseEvents = React.createClass
                           type: 'search'
                           placeholder: 'Find events and artists'
                     React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12'
+                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'ontap' then ' Selected' else '')
                       id: 'eventsOnTap'
+                      onClick: @navigate
+                      'data-target': 'ontap'
                       children:
                         React.DOM.p
                           children: 'Events on tap'
                     React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12'
+                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'confirmed' then ' Selected' else '')
                       id: 'confirmedEvents'
                       children:
                         React.DOM.p
                           children: 'Confirmed events'
                     React.DOM.div
-                      className: 'NavigatorSection Selected col-xs-3 col-sm-12'
+                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'feat' then ' Selected' else '')
                       id: 'featuredArtists'
+                      onClick: @navigate
+                      'data-target': 'feat'
                       children:
                         React.DOM.p
                           children: 'Featured artists'
                     React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12'
+                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'friends' then ' Selected' else '')
                       id: 'friends'
                       children:
                         React.DOM.p
@@ -127,10 +138,14 @@ TD.BrowseEvents = React.createClass
             React.DOM.section
               className: 'col-xs-12 col-sm-9'
               id: 'browseContent'
-              children: TD.FeaturedArtists()
+              children: if @props.nav == 'ontap' then TD.EventsOnTap() else TD.FeaturedArtists()
           ]
 
 Reaction.FanRoot = React.createClass
+  getInitialState: ->
+    return { nav: 'feat' }
+  switchSections: (target) ->
+    @setState({ nav: target })
   render: ->
     React.DOM.div
       children: [
@@ -141,7 +156,7 @@ Reaction.FanRoot = React.createClass
           children:
             React.DOM.div
               className: 'row'
-              children: TD.BrowseEvents()
+              children: TD.BrowseEvents({ nav: @state.nav, navigate: @switchSections })
       ]
 
 navWidth = false
