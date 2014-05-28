@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 1.2'
 group :development do
   gem 'annotate'
   gem 'guard-livereload'
+  gem 'guard-shell'
+  gem "hsume2-browserify-rails", "~> 0.2.0", :require => "browserify-rails"
 end
 
 group :doc do

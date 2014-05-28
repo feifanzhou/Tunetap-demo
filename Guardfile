@@ -33,3 +33,11 @@ guard 'livereload', grace_period: 0 do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
 end
+
+# Add files and commands to this file, like the example:
+#   watch(%r{file/path}) { `command(s)` }
+#
+guard :shell do
+  watch(/(.*).txt/) {|m| `tail #{m[0]}` }
+  watch(%r{app/assets/javascripts/.+\.js}) {|m| `npm test` }
+end

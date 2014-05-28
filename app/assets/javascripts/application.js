@@ -10,14 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require jquery
-// require jquery_ujs
-//= require reaction
-// require_tree .
-//= require _utils
 //= require react-with-addons
+//= require reaction
+//= require _utils
 //= require_tree ./components
-// require _init
 
 Reaction.Router.initialize({
   '/': 'Root',

@@ -1,5 +1,13 @@
 window.TD or= {}
 
+# Hack to make testing with npm work
+if typeof require != 'undefined'
+  React = require 'react'
+  Reaction = require '../../../../vendor/assets/javascripts/reaction.js'
+else
+  React = window.React
+  Reaction = window.Reaction
+
 dylan = { name: 'Dylan Owen', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/1969121_677884932255138_1459446033_n.jpg', tapCount: 42 }
 reef = { name: 'Reef of Fortune', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-frc3/t1.0-9/428480_10151577933933570_1949326179_n.jpg', tapCount: 70 }
 astrid = { name: 'Astrid Lundberg', profilePhoto: 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc3/t1.0-9/1653911_790732140942087_600888531_n.jpg', tapCount: 18 }
@@ -225,11 +233,10 @@ Reaction.FanRoot = React.createClass
               className: 'row'
               children: TD.BrowseEvents({ nav: @state.nav, navigate: @switchSections })
       ]
-# module.exports = {  # For testing use
-#   'FanRoot': Reaction.FanRoot
-#   'BrowseEvents': TD.BrowseEvents
-# }
-module.exports = Reaction.FanRoot
+module.exports = {  # For testing use
+  'FanRoot': Reaction.FanRoot
+  'BrowseEvents': TD.BrowseEvents
+} if typeof module != 'undefined'
 
 navWidth = false
 top = false  # Position of content from top of page

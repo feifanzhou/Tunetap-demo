@@ -13,3 +13,5 @@ HTMLElement::removeClass = (remove) ->
     i++
   @className = newClassName
   return
+
+module.exports = window.Util if typeof module != 'undefined'

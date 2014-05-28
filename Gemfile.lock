@@ -61,7 +61,11 @@ GEM
       em-websocket (~> 0.5)
       guard (~> 2.0)
       multi_json (~> 1.8)
+    guard-shell (0.6.1)
+      guard (>= 1.1.0)
     hike (1.2.3)
+    hsume2-browserify-rails (0.2.1)
+      sprockets (~> 2.0)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -167,6 +171,8 @@ DEPENDENCIES
   annotate
   coffee-rails (~> 4.0.0)
   guard-livereload
+  guard-shell
+  hsume2-browserify-rails (~> 0.2.0)
   jbuilder (~> 1.2)
   jquery-rails
   newrelic_rpm
