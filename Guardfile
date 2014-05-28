@@ -39,5 +39,5 @@ end
 #
 guard :shell do
   watch(/(.*).txt/) {|m| `tail #{m[0]}` }
-  watch(%r{app/assets/javascripts/.+\.js}) {|m| `npm test` }
+  watch(%r{app/assets/javascripts/.+\.(coffee|js)}) {|m| `npm test` }
 end
