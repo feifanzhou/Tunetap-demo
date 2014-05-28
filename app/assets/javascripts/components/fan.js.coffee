@@ -89,6 +89,14 @@ TD.FeaturedArtists = React.createClass
       children: artists.map( (artist) ->
         return Shared.ArtistCard({ artist: artist })
       )
+TD.FriendActivity = React.createClass
+  render: ->
+    React.DOM.div
+      className: 'row'
+      children:
+        React.DOM.p
+          className: 'col-xs-12 FriendResults'
+          children: "We're working on this, but nothing here yet"
 TD.DemoDisclaimer = React.createClass
   render: ->
     React.DOM.aside
@@ -195,6 +203,8 @@ TD.BrowseEvents = React.createClass
                     React.DOM.div
                       className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'friends' then ' Selected' else '')
                       id: 'friends'
+                      onClick: @navigate
+                      'data-target': 'friends'
                       children:
                         React.DOM.p
                           children: 'Friends'
@@ -212,6 +222,8 @@ TD.BrowseEvents = React.createClass
                            TD.EventsOnTap() 
                          else if @props.nav == 'confirmed'
                            TD.ConfirmedEvents()
+                         else if @props.nav == 'friends'
+                           TD.FriendActivity()
                          else
                            TD.FeaturedArtists()
                         )
