@@ -2,11 +2,17 @@ window.TD or= {}
 
 TD.FundingProgress = React.createClass
   render: ->
+    cx = React.addons.classSet
+    progressClass = cx({
+      'progress-bar': true
+      'progress-bar-success': @props.progressPercent >= 100
+      'ProgressFill': true
+    })
     React.DOM.div
       className: 'progress ProgressContainer'
       children:
         React.DOM.div
-          className: 'progress-bar progress-bar-success ProgressFill'
+          className: progressClass
           role: 'progressbar'
           style: { width: @props.progressPercent + '%' }
           children:

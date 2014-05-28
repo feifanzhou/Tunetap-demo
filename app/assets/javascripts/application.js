@@ -15,7 +15,7 @@
 //= require reaction
 // require_tree .
 //= require _utils
-//= require react.full
+//= require react-with-addons
 //= require_tree ./components
 // require _init
 

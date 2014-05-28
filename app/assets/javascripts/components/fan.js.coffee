@@ -29,7 +29,18 @@ e2 = {
   location: 'The Gates'
   time: 'Next Friday, 10pm'
 }
+e3 = {
+  name: 'East by Northeast'
+  coverPhoto: 'http://sxsw.com/sites/default/files/news/image/outdoor%20stage%204_0.jpg'
+  progress: 212
+  friends: [498, 184, 371, 572, 96]
+  moreFriends: 57
+  peopleCount: 729
+  location: 'Coney Island'
+  time: 'June 12, all day'
+}
 events = [e1, e2]
+confirmedEvents = [e3]
 
 demoString = 'This is an interactive demo. '
 if Util.hasLocalStorage()
@@ -37,12 +48,28 @@ if Util.hasLocalStorage()
 else 
   demoString += "Your changes will not be saved because your browser doesn't support saving changes."
 
+TD.SearchResults = React.createClass
+  render: ->
+    React.DOM.div
+      className: 'row'
+      children:
+        React.DOM.p
+          className: 'col-xs-12'
+          children: 'Search is currently not available in this demo. But you can probably imagine how it works :)'
 TD.EventsOnTap = React.createClass
   render: ->
     React.DOM.div
       className: 'row'
       id: 'eventsOnTapContainer'
       children: events.map( (event) ->
+        return TD.EventCard({ event: event })
+      )
+TD.ConfirmedEvents = React.createClass
+  render: ->
+    React.DOM.div
+      className: 'row'
+      id: 'confirmedEventsContainer'
+      children: confirmedEvents.map( (event) ->
         return TD.EventCard({ event: event })
       )
 TD.FeaturedArtists = React.createClass
@@ -120,11 +147,15 @@ TD.BrowseEvents = React.createClass
                   className: 'row'
                   children: [
                     React.DOM.form
-                      className: 'NavigatorSection col-xs-12'
+                      className: 'NavigatorSection col-xs-12' + (if @props.nav == 'search' then ' Selected' else '')
+                      onClick: @navigate
+                      'data-target': 'search'
                       id: 'navigatorSearchForm'
                       children:
                         React.DOM.input
                           className: 'form-control'
+                          onFocus: @navigate
+                          'data-target': 'search'
                           id: 'navigatorSearch'
                           type: 'search'
                           placeholder: 'Find events and artists'
@@ -139,6 +170,8 @@ TD.BrowseEvents = React.createClass
                     React.DOM.div
                       className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'confirmed' then ' Selected' else '')
                       id: 'confirmedEvents'
+                      onClick: @navigate
+                      'data-target': 'confirmed'
                       children:
                         React.DOM.p
                           children: 'Confirmed events'
@@ -164,7 +197,15 @@ TD.BrowseEvents = React.createClass
             React.DOM.section
               className: 'col-xs-12 col-sm-9'
               id: 'browseContent'
-              children: if @props.nav == 'ontap' then TD.EventsOnTap() else TD.FeaturedArtists()
+              children: (if @props.nav == 'search'
+                           TD.SearchResults()
+                         else if @props.nav == 'ontap' 
+                           TD.EventsOnTap() 
+                         else if @props.nav == 'confirmed'
+                           TD.ConfirmedEvents()
+                         else
+                           TD.FeaturedArtists()
+                        )
           ]
 
 Reaction.FanRoot = React.createClass
@@ -184,6 +225,11 @@ Reaction.FanRoot = React.createClass
               className: 'row'
               children: TD.BrowseEvents({ nav: @state.nav, navigate: @switchSections })
       ]
+# module.exports = {  # For testing use
+#   'FanRoot': Reaction.FanRoot
+#   'BrowseEvents': TD.BrowseEvents
+# }
+module.exports = Reaction.FanRoot
 
 navWidth = false
 top = false  # Position of content from top of page

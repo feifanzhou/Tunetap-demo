@@ -30,6 +30,10 @@ TunetapDemo::Application.configure do
   # Fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
+  # For much faster deploys
+  # http://blog.alexmaccaw.com/faster-deploys
+  config.assets.cache_store = :dalli_store
+
   # Generate digests for assets URLs.
   config.assets.digest = true
 
