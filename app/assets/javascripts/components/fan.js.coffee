@@ -4,6 +4,7 @@ window.TD or= {}
 if typeof require != 'undefined'
   React = require 'react'
   Reaction = require '../../../../vendor/assets/javascripts/reaction.js'
+  window.Shared = require './_shared.js.coffee' # FIX: This may drop previously added objects
 else
   React = window.React
   Reaction = window.Reaction
@@ -70,7 +71,7 @@ TD.EventsOnTap = React.createClass
       className: 'row'
       id: 'eventsOnTapContainer'
       children: events.map( (event) ->
-        return TD.EventCard({ event: event })
+        return Shared.EventCard({ event: event })
       )
 TD.ConfirmedEvents = React.createClass
   render: ->
@@ -78,7 +79,7 @@ TD.ConfirmedEvents = React.createClass
       className: 'row'
       id: 'confirmedEventsContainer'
       children: confirmedEvents.map( (event) ->
-        return TD.EventCard({ event: event })
+        return Shared.EventCard({ event: event })
       )
 TD.FeaturedArtists = React.createClass
   render: ->
@@ -86,7 +87,7 @@ TD.FeaturedArtists = React.createClass
       className: 'row'
       id: 'featuredArtistsContainer'
       children: artists.map( (artist) ->
-        return TD.ArtistCard({ artist: artist })
+        return Shared.ArtistCard({ artist: artist })
       )
 TD.DemoDisclaimer = React.createClass
   render: ->

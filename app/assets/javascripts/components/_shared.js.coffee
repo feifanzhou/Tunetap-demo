@@ -1,6 +1,11 @@
-window.TD or= {}
+window.Shared or= {}
 
-TD.FundingProgress = React.createClass
+if typeof require != 'undefined'
+  React = require 'react'
+else
+  React = window.React
+
+Shared.FundingProgress = React.createClass
   render: ->
     cx = React.addons.classSet
     progressClass = cx({
@@ -20,7 +25,7 @@ TD.FundingProgress = React.createClass
               className: 'sr-only'
               children: @props.progressPercent + '% funded'
 
-TD.ArtistCard = React.createClass
+Shared.ArtistCard = React.createClass
   render: ->
     React.DOM.div
       className: 'ArtistCard DemoCard col-xs-12 col-sm-6 col-md-4'
@@ -48,7 +53,7 @@ TD.ArtistCard = React.createClass
                   children: 'Tap'
               ]
           ]
-TD.EventCard = React.createClass
+Shared.EventCard = React.createClass
   render: ->
     friendsGoing =  @props.event.friends.map( (friend) ->
                       return React.DOM.img
@@ -79,7 +84,7 @@ TD.EventCard = React.createClass
                   children: @props.event.name
                 React.DOM.div
                   className: 'EventCardProgress col-xs-12'
-                  children: TD.FundingProgress({ progressPercent: @props.event.progress })
+                  children: Shared.FundingProgress({ progressPercent: @props.event.progress })
                 React.DOM.div
                   className: 'EventCardPeople col-xs-12'
                   children: [
@@ -114,3 +119,5 @@ TD.EventCard = React.createClass
                       children: 'Grab a ticket'
               ]
           ]
+
+module.exports = window.Shared if typeof module != 'undefined'
