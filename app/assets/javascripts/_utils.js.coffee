@@ -14,4 +14,19 @@ HTMLElement::removeClass = (remove) ->
   @className = newClassName
   return
 
+# http://stackoverflow.com/questions/9178174/find-all-text-nodes
+# Seems to exceed call stack, doesn't work :()
+Util.elementHasText = (el, text) ->
+  helper = -> # To address possible scoping issues?
+    return true if (el.nodeType == Node.TEXT_NODE && el.nodeValue.trim() != '' && el.nodeValue == text)
+    if el.childNodes.length <= 0
+      return false
+    else
+      i = 0
+      while i < el.childNodes.length
+        helper el.childNodes[i]
+        i++
+  return helper()
+
+
 module.exports = window.Util if typeof module != 'undefined'

@@ -4,7 +4,7 @@ window.TD or= {}
 if typeof require != 'undefined'
   React = require 'react'
   Reaction = require '../../../../vendor/assets/javascripts/reaction.js'
-  window.Shared = require './_shared.js.coffee' # FIX: This may drop previously added objects
+  window.Shared = require './_shared.js.coffee'
 else
   React = window.React
   Reaction = window.Reaction
@@ -63,7 +63,7 @@ TD.SearchResults = React.createClass
       className: 'row'
       children:
         React.DOM.p
-          className: 'col-xs-12'
+          className: 'col-xs-12 SearchResults'
           children: 'Search is currently not available in this demo. But you can probably imagine how it works :)'
 TD.EventsOnTap = React.createClass
   render: ->
@@ -204,7 +204,7 @@ TD.BrowseEvents = React.createClass
               id: 'browseNavigatorSpacer'
               children: ''
             React.DOM.section
-              className: 'col-xs-12 col-sm-9'
+              className: 'BrowseContent col-xs-12 col-sm-9'
               id: 'browseContent'
               children: (if @props.nav == 'search'
                            TD.SearchResults()
