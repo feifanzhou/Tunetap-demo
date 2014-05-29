@@ -54,6 +54,8 @@ $media-lg: 'only screen and (min-width: 1200px)';
       width: 100%;
     }
     .DemoCardBody {
+      background: transparentize(white, 0.15);
+      color: #333;
       padding: 0.75em;
       .DemoCardName {
         font-size: 1.2em;
@@ -70,9 +72,21 @@ $media-lg: 'only screen and (min-width: 1200px)';
       }
     }
   }
+  &.Small {
+    font-size: 0.65em;
+  }
 }
 .ArtistCard {
   @include DemoCard;
+  &.Small {
+    .ArtistCardTapCount {
+      font-size: 1.2em;
+      margin-bottom: 0.25em;
+    }
+    .ArtistCardMoreButton, .ArtistCardTapButton {
+      display: none !important;
+    }
+  }
 }
 .EventCard {
   @include DemoCard;

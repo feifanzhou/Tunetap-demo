@@ -27,8 +27,22 @@ Shared.FundingProgress = React.createClass
 
 Shared.ArtistCard = React.createClass
   render: ->
+    cx = React.addons.classSet
+    classes = cx({
+      'ArtistCard': true,
+      'DemoCard': true,
+      'Small': @props.shouldBeSmall
+      'col-xs-12': !@props.shouldBeSmall
+      'col-xs-4': @props.shouldBeSmall
+      'col-sm-6': !@props.shouldBeSmall
+      'col-sm-3': @props.shouldBeSmall
+      'col-md-4': !@props.shouldBeSmall
+      'col-md-2': @props.shouldBeSmall
+    })
     React.DOM.div
-      className: 'ArtistCard DemoCard col-xs-12 col-sm-6 col-md-4'
+      className: classes
+      'data-name': @props.artist.name
+      onClick: @props.onClick
       children:
         React.DOM.div
           className: 'DemoCardContent'

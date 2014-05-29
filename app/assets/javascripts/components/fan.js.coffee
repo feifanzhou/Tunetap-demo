@@ -105,8 +105,70 @@ TD.DemoDisclaimer = React.createClass
       children:
         React.DOM.p
           children: demoString
-TD.TapThat = React.createClass
+TD.ArtistList = React.createClass
   render: ->
+    clickHandler = @props.didClickResult
+    React.DOM.div
+      className: 'col-xs-12 col-sm-10 col-sm-offset-1 TapArtistList'
+      children:
+        React.DOM.div
+          className: 'row TapArtistContent'
+          children: @props.artists.map( (artist) ->
+            return Shared.ArtistCard({ artist: artist, shouldBeSmall: true, onClick: clickHandler })
+          )
+TD.TapThat = React.createClass
+  getInitialState: ->
+    return { isSearching: false, artistList: artists }
+  startSearching: ->
+    @setState({ isSearching: true })
+  updateSearch: ->
+    searchTerm = @refs.searchField.getDOMNode().value.trim().toLowerCase()
+    if searchTerm.length == 0
+      @setState({ artistList: artists })
+      return
+    filteredArtists = artists.filter( (artist) ->
+      return artist.name.toLowerCase().indexOf(searchTerm) == 0
+    )
+    @setState({ artistList: filteredArtists })
+  didClickResult: (e) ->
+    @refs.searchField.getDOMNode().value = e.currentTarget.getAttribute('data-name')
+    @updateSearch()
+  render: ->
+    children = [
+      React.DOM.form
+        className: 'col-xs-12 form-inline text-center'
+        id: 'tapForm'
+        children: [
+          React.DOM.span
+            className: 'TapFormPrompt'
+            id: 'tapPrompt'
+            children: 'Tap'
+          React.DOM.input
+            className: 'form-control TapArtistField'
+            type: 'text'
+            ref: 'searchField'
+            id: 'searchField'
+            onFocus: @startSearching
+            onKeyUp: @updateSearch
+            placeholder: 'Artist'
+          React.DOM.span
+            className: 'TapFormPrompt'
+            id: 'forPrompt'
+            children: 'for'
+          React.DOM.input
+            className: 'form-control'
+            type: 'text'
+            placeholder: 'City'
+            defaultValue: 'New York City'
+          React.DOM.button
+            className: 'btn btn-primary'
+            id: 'tapButton'
+            type: 'submit'
+            children: 'Go!'
+        ]
+    ]
+    if @state.isSearching
+      children.push TD.ArtistList({ artists: @state.artistList, didClickResult: @didClickResult })
     React.DOM.section
       className: 'jumbotron'
       id: 'tapThatBlock'
@@ -116,34 +178,7 @@ TD.TapThat = React.createClass
           children:
             React.DOM.div
               className: 'row'
-              children:
-                React.DOM.form
-                  className: 'col-xs-12 form-inline text-center'
-                  id: 'tapForm'
-                  children: [
-                    React.DOM.span
-                      className: 'TapFormPrompt'
-                      id: 'tapPrompt'
-                      children: 'Tap'
-                    React.DOM.input
-                      className: 'form-control'
-                      type: 'text'
-                      placeholder: 'Artist'
-                    React.DOM.span
-                      className: 'TapFormPrompt'
-                      id: 'forPrompt'
-                      children: 'for'
-                    React.DOM.input
-                      className: 'form-control'
-                      type: 'text'
-                      placeholder: 'City'
-                      defaultValue: 'New York City'
-                    React.DOM.button
-                      className: 'btn btn-primary'
-                      id: 'tapButton'
-                      type: 'submit'
-                      children: 'Go!'
-                  ]
+              children: children
 TD.BrowseEvents = React.createClass
   navigate: (event) ->
     target = event.target.getAttribute('data-target')

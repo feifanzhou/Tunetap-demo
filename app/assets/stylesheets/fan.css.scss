@@ -46,6 +46,16 @@ body {
     position: relative;
     top: -0.8em;
   }
+  .TapArtistList {
+    overflow: hidden;
+    .TapArtistContent {
+      white-space: nowrap;
+      .ArtistCard {
+        display: inline-block;
+        float: none;
+      }
+    }
+  }
 }
 #browseEvents {
   #browseNavigator {
