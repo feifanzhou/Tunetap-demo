@@ -152,3 +152,59 @@ body {
     overflow: hidden;
   }
 }
+
+#petitionRoot {
+  #bkg {
+    @include background-image-retina('skizzy', 'jpg', 1920, 1440);
+    background-position: 50% 70%;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+  #petitionContent {
+    background: transparentize(black, 0.5);
+    border-radius: 0.5em;
+    color: white;
+    padding: 3em 1em 2em 1em;
+    position: relative;
+    top: -1000px;
+    @include vendor-prefix(transition, all 2s);
+    #petitionCount, #petitionToPlayIn {
+      font-size: 2em;
+      font-weight: 300;
+      margin: 0;
+    }
+    #petitionArtist, #petitionCity {
+      font-size: 3em;
+      font-weight: 700;
+      margin: 0.5em auto;
+    }
+    #petitionRespond {
+      font-size: 1.1em;
+      font-weight: 300;
+      margin: 0;
+    }
+    #petitionActions {
+      font-size: 0.85em;
+      margin-top: 2em;
+      h3 {
+        font-size: 1.5em;
+        font-weight: 700;
+        a {
+          color: transparentize(white, 0.15);
+          @include vendor-prefix(transition, color 0.25s);
+          &:hover {
+            color: white;
+            text-decoration: none;
+          }
+        }
+      }
+      p {
+        color: transparentize(white, 0.15);
+      }
+    }
+  }
+}

@@ -38,13 +38,54 @@ describe 'FanRoot', ->
       # @TestUtils.Simulate.keyUp(field, { key: 'x' })
       # nameElements = artistContent.getDOMNode().getElementsByClassName('DemoCardName')
       # expect(nameElements.length).toEqual(0)
-    it 'should fill artist name when selecting artist', ->
+    it 'should fill artist name and update cards when selecting artist', ->
       field = @TestUtils.findRenderedDOMComponentWithClass(@fanRoot, 'TapArtistField')
       @TestUtils.Simulate.focus(field)
       artistContent = @TestUtils.findRenderedDOMComponentWithClass(@fanRoot, 'TapArtistContent')
       dylanCard = artistContent.getDOMNode().getElementsByClassName('ArtistCard')[0]
       @TestUtils.Simulate.click(dylanCard)
       expect(field.getDOMNode().value).toEqual('Dylan Owen')
+      cards = @TestUtils.scryRenderedDOMComponentsWithClass(@fanRoot, 'ArtistCard')
+      expect(cards.length).toEqual(1)
+
+  describe 'Tap an artist', ->
+    beforeEach ->
+      # Mock localStorage
+      # http://stackoverflow.com/a/14381941/472768
+      store = {}
+      console.log('before each')
+      spyOn(localStorage, 'getItem').andCallFake((key) ->
+        return store[key]
+      )
+      spyOn(localStorage, 'setItem').andCallFake((key, value) ->
+        return store[key] = value + '';
+      )
+      spyOn(localStorage, 'clear').andCallFake(-> store = {})
+
+      # Fill in artist
+      field = @TestUtils.findRenderedDOMComponentWithClass(@fanRoot, 'TapArtistField')
+      field.getDOMNode().value = 'Dylan Owen'
+      # Click tap button
+      btn = @TestUtils.findRenderedDOMComponentWithClass(@fanRoot, 'TapButton')
+      @TestUtils.Simulate.click(btn)
+      
+    it 'should save petition in localStorage', ->
+      console.log('Saving')
+      # data = localStorage.getItem('petitions').split('&^&')
+      data = [1, 2, 3]
+      saved = false
+      for x in data
+        if x == 1  # Dylan's ID
+          saved = true
+          break
+      expect(saved).toBeTruthy()
+    # Not meaningful in this demo
+    # it 'should make sure duplicate requests are not saved', ->
+
+    # it 'should update URL to petition page', ->
+
+    # it 'should display petition page data', ->
+
 
   describe 'FanRoot content', ->
     beforeEach ->

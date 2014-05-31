@@ -9,13 +9,115 @@ else
   React = window.React
   Reaction = window.Reaction
 
-dylan = { name: 'Dylan Owen', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/1969121_677884932255138_1459446033_n.jpg', tapCount: 42 }
-reef = { name: 'Reef of Fortune', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-frc3/t1.0-9/428480_10151577933933570_1949326179_n.jpg', tapCount: 70 }
-astrid = { name: 'Astrid Lundberg', profilePhoto: 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc3/t1.0-9/1653911_790732140942087_600888531_n.jpg', tapCount: 18 }
-skizzy = { name: 'Skizzy Mars', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/1184804_718856148144954_1944971323_n.jpg', tapCount: 247 }
-blau = { name: '3LAU', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1621926_657666347612609_903799826_n.jpg', tapCount: 524 }
-logic = { name: 'Logic', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/532803_470548606304111_1258950956_n.jpg', tapCount: 498 }
-kings = { name: 'Kings of the City', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1012372_10151668216408584_253838762_n.jpg', tapCount: 63 }
+Reaction.PetitionRoot = React.createClass
+  componentDidMount: ->
+    setTimeout((->
+      content = document.getElementById('petitionContent')
+      height = content.offsetHeight
+      # http://stackoverflow.com/a/8876069/472768
+      viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+      topPos = 0
+      if height< viewportHeight
+        topPos = (viewportHeight - height) / 2
+      content.style.top = topPos + 'px' if content
+      return), 250)
+  render: ->
+    petitionID = parseInt(@props.id, 10)
+    petitions = JSON.parse(localStorage.getItem('petitions'))
+    petition = null
+    for ptn in petitions
+      if ptn.id == petitionID
+        petition = ptn
+        break
+    # if !petition  TODO: Fix 'undefined function' error
+    #   Reaction.renderError(404, '')
+    artist = petition.artist
+    city = petition.city
+    React.DOM.div
+      className: 'container'
+      id: 'petitionRoot'
+      children: [
+        React.DOM.div
+          id: 'bkg'
+        React.DOM.div
+          className: 'row'
+          id: 'petition'
+          children:
+            React.DOM.div
+              className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'
+              id: 'petitionContent'
+              children: [
+                React.DOM.div
+                  className: 'row'
+                  children:
+                    React.DOM.p
+                      className: 'col-xs-12 text-center'
+                      id: 'petitionCount'
+                      children: ('You and ' + petition.count + ' others are tapping')
+                React.DOM.div
+                  className: 'row'
+                  children:
+                    React.DOM.h1
+                      className: 'col-xs-12 text-center'
+                      id: 'petitionArtist'
+                      children: artist
+                React.DOM.div
+                  className: 'row'
+                  children:
+                    React.DOM.p
+                      className: 'col-xs-12 text-center'
+                      id: 'petitionToPlayIn'
+                      children: 'to play in'
+                React.DOM.div
+                  className: 'row'
+                  children:
+                    React.DOM.h2
+                      className: 'col-xs-12 text-center'
+                      id: 'petitionCity'
+                      children: city
+                React.DOM.div
+                  className: 'row'
+                  id: 'petitionRespond'
+                  children:
+                    React.DOM.p
+                      className: 'col-xs-12 text-center'
+                      id: 'petitionRespond'
+                      children: 'We\'ll let you know when they respond!'
+                React.DOM.div
+                  className: 'row'
+                  id: 'petitionActions'
+                  children: [
+                    React.DOM.div
+                      className: 'col-xs-12 col-sm-6'
+                      id: 'petitionSocial'
+                      children: [
+                        React.DOM.h3
+                          children: 'Spread the word'
+                        React.DOM.p
+                          children: 'The more people supporting this petition, the more likely the show will happen.'
+                        React.DOM.p
+                          children: 'Share on Facebook | Tweet this | Be social'
+                      ]
+                    React.DOM.div
+                      className: 'col-xs-12 col-sm-6'
+                      id: 'browseEvents'
+                      children: 
+                        React.DOM.h3
+                          children: 
+                            React.DOM.a
+                              href: '/fan'
+                              children: 'See more events \u203A'
+                  ]
+              ]
+      ]
+
+dylan = { id: 1, name: 'Dylan Owen', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/1969121_677884932255138_1459446033_n.jpg', tapCount: 42 }
+reef = { id: 2, name: 'Reef of Fortune', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-frc3/t1.0-9/428480_10151577933933570_1949326179_n.jpg', tapCount: 70 }
+astrid = { id: 3, name: 'Astrid Lundberg', profilePhoto: 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc3/t1.0-9/1653911_790732140942087_600888531_n.jpg', tapCount: 18 }
+skizzy = { id: 4, name: 'Skizzy Mars', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/1184804_718856148144954_1944971323_n.jpg', tapCount: 247 }
+blau = { id: 5, name: '3LAU', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1621926_657666347612609_903799826_n.jpg', tapCount: 524 }
+logic = { id: 6, name: 'Logic', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/532803_470548606304111_1258950956_n.jpg', tapCount: 498 }
+kings = { id: 7, name: 'Kings of the City', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1012372_10151668216408584_253838762_n.jpg', tapCount: 63 }
 artists = [dylan, reef, blau, kings]
 
 e1 = {
@@ -132,7 +234,21 @@ TD.TapThat = React.createClass
     @setState({ artistList: filteredArtists })
   didClickResult: (e) ->
     @refs.searchField.getDOMNode().value = e.currentTarget.getAttribute('data-name')
+    @refs.searchField.getDOMNode().setAttribute('data-artist-id', e.currentTarget.getAttribute('data-id'))
     @updateSearch()
+  createPetition: (e) ->
+    e.preventDefault()
+    artist = document.getElementById('searchField').value
+    city = document.getElementById('cityField').value
+    petitionsText = localStorage.getItem('petitions')
+    petitions = if petitionsText && typeof petitionsText != 'undefined' then JSON.parse(petitionsText) else []
+    newID = petitions.length + 1
+    seed = Math.floor(Math.random() * 100)
+    newPetition = { id: newID, artist: artist, city: city, count: seed }
+    petitions.push(newPetition)
+    localStorage.setItem('petitions', JSON.stringify(petitions))
+    Reaction.Router.linkTo('/petition/' + newID)
+    # React.renderComponent(Reaction.PetitionRoot({ id: newID }), document.getElementsById('root'))
   render: ->
     children = [
       React.DOM.form
@@ -158,12 +274,14 @@ TD.TapThat = React.createClass
           React.DOM.input
             className: 'form-control'
             type: 'text'
+            id: 'cityField'
             placeholder: 'City'
             defaultValue: 'New York City'
           React.DOM.button
-            className: 'btn btn-primary'
+            className: 'btn btn-primary TapButton'
             id: 'tapButton'
-            type: 'submit'
+            # type: 'submit'
+            onClick: @createPetition
             children: 'Go!'
         ]
     ]

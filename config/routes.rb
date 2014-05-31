@@ -6,6 +6,7 @@ TunetapDemo::Application.routes.draw do
   root 'root#index'
 
   get '/:path' => 'root#index'
+  get '/petition/:id' => 'root#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

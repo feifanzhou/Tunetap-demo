@@ -42,6 +42,7 @@ Shared.ArtistCard = React.createClass
     React.DOM.div
       className: classes
       'data-name': @props.artist.name
+      'data-id': @props.artist.id
       onClick: @props.onClick
       children:
         React.DOM.div
