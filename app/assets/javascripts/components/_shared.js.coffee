@@ -25,7 +25,7 @@ Shared.FundingProgress = React.createClass
               className: 'sr-only'
               children: @props.progressPercent + '% funded'
 
-Shared.ArtistCard = React.createClass
+window.Shared.ArtistCard = React.createClass
   render: ->
     cx = React.addons.classSet
     classes = cx({
@@ -66,6 +66,8 @@ Shared.ArtistCard = React.createClass
                 React.DOM.button
                   className: 'btn btn-primary ArtistCardTapButton'
                   children: 'Tap'
+                  'data-artist-name': @props.artist.name
+                  onClick: @props.tapAction
               ]
           ]
 Shared.EventCard = React.createClass

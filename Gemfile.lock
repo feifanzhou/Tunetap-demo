@@ -64,16 +64,11 @@ GEM
     guard-shell (0.6.1)
       guard (>= 1.1.0)
     hike (1.2.3)
-    hsume2-browserify-rails (0.2.1)
-      sprockets (~> 2.0)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
-    jquery-rails (3.1.0)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.9.2)
     listen (2.7.5)
@@ -172,9 +167,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   guard-livereload
   guard-shell
-  hsume2-browserify-rails (~> 0.2.0)
   jbuilder (~> 1.2)
-  jquery-rails
   newrelic_rpm
   pg
   rails (~> 4.1.0.rc2)

@@ -173,7 +173,7 @@ TD.EventsOnTap = React.createClass
       className: 'row'
       id: 'eventsOnTapContainer'
       children: events.map( (event) ->
-        return Shared.EventCard({ event: event })
+        return window.Shared.EventCard({ event: event })
       )
 TD.ConfirmedEvents = React.createClass
   render: ->
@@ -185,11 +185,12 @@ TD.ConfirmedEvents = React.createClass
       )
 TD.FeaturedArtists = React.createClass
   render: ->
+    tapAction = @props.tapAction
     React.DOM.div
       className: 'row'
       id: 'featuredArtistsContainer'
-      children: artists.map( (artist) ->
-        return Shared.ArtistCard({ artist: artist })
+      children: artists.map((artist) ->
+        return Shared.ArtistCard({ artist: artist, tapAction: tapAction })
       )
 TD.FriendActivity = React.createClass
   render: ->
@@ -378,7 +379,7 @@ TD.BrowseEvents = React.createClass
                          else if @props.nav == 'friends'
                            TD.FriendActivity()
                          else
-                           TD.FeaturedArtists()
+                           TD.FeaturedArtists({ tapAction: @props.tapAction })
                         )
           ]
 
@@ -387,6 +388,24 @@ Reaction.FanRoot = React.createClass
     return { nav: 'ontap' }
   switchSections: (target) ->
     @setState({ nav: target })
+  tapArtist: (event) ->
+    document.getElementById('searchField').value = event.target.getAttribute('data-artist-name')
+    doc = document.documentElement
+    body = document.body
+    scrPos = (doc && doc.scrollTop  || body && body.scrollTop  || 0)
+    scrRate = scrPos / 30
+    scrollTo = (pos) ->
+      console.log('scrPos: ' + scrPos)
+      console.log('scrollTo: ' + pos)
+      setTimeout((->
+        return if scrPos <= 0
+        scrPos -= scrRate
+        scrPos = 0 if scrPos < 0
+        console.log('scrPos')
+        window.scrollTo(0, scrPos)
+        scrollTo(scrPos)
+      ), 16.666666666666)
+    scrollTo(0)
   render: ->
     React.DOM.div
       children: [
@@ -397,7 +416,7 @@ Reaction.FanRoot = React.createClass
           children:
             React.DOM.div
               className: 'row'
-              children: TD.BrowseEvents({ nav: @state.nav, navigate: @switchSections })
+              children: TD.BrowseEvents({ nav: @state.nav, navigate: @switchSections, tapAction: @tapArtist })
       ]
 module.exports = {  # For testing use
   'FanRoot': Reaction.FanRoot
