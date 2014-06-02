@@ -132,6 +132,7 @@ e1 = {
 }
 e2 = {
   name: 'Live at The Gates'
+  artist_ids: [1]
   coverPhoto: 'http://www.wallsave.com/wallpapers/1920x1080/skate/1018922/skate-music-concert-noise-jpg-1018922.jpg'
   progress: 55.0
   friends: [293, 85, 998, 50, 2983]
@@ -142,6 +143,7 @@ e2 = {
 }
 e3 = {
   name: 'East by Northeast'
+  artist_ids: [2, 7]
   coverPhoto: 'http://sxsw.com/sites/default/files/news/image/outdoor%20stage%204_0.jpg'
   progress: 212
   friends: [498, 184, 371, 572, 96]
@@ -244,7 +246,7 @@ TD.TapThat = React.createClass
     petitionsText = localStorage.getItem('petitions')
     petitions = if petitionsText && typeof petitionsText != 'undefined' then JSON.parse(petitionsText) else []
     newID = petitions.length + 1
-    seed = Math.floor(Math.random() * 100)
+    seed = Math.floor(Math.random() * 100) + 10
     newPetition = { id: newID, artist: artist, city: city, count: seed }
     petitions.push(newPetition)
     localStorage.setItem('petitions', JSON.stringify(petitions))
