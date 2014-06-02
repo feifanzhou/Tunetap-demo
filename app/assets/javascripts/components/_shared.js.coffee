@@ -2,8 +2,15 @@ window.Shared or= {}
 
 if typeof require != 'undefined'
   React = require 'react'
+  Reaction = require '../../../../vendor/assets/javascripts/reaction.js'
 else
   React = window.React
+  Reaction = window.Reaction
+
+Reaction.Error404 = React.createClass
+  render: ->
+    React.DOM.p
+      children: '404 error'
 
 Shared.FundingProgress = React.createClass
   render: ->
@@ -60,8 +67,10 @@ window.Shared.ArtistCard = React.createClass
                 React.DOM.p
                   className: 'ArtistCardTapCount'
                   children: 'Tapped ' + @props.artist.tapCount + ' times'
-                React.DOM.button
+                React.DOM.a
                   className: 'btn btn-default ArtistCardMoreButton'
+                  role: 'button'
+                  href: '/artist/' + @props.artist.id
                   children: 'Find out more'
                 React.DOM.button
                   className: 'btn btn-primary ArtistCardTapButton'

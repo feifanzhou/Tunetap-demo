@@ -157,12 +157,6 @@ body {
   #bkg {
     @include background-image-retina('skizzy', 'jpg', 1920, 1440);
     background-position: 50% 70%;
-    background-size: cover;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
   }
   #petitionContent {
     background: transparentize(black, 0.5);

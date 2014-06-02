@@ -1,0 +1,74 @@
+#bkgGrad {
+  background: rgba(0, 0, 0, 0.65);
+  @media #{ $media-sm } {
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+  }
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+#artistContainer {
+  color: white;
+  margin: 2em auto auto 2em;
+  #artistProfile {
+    color: white;
+    text-shadow: 0 0 3px transparentize(black, 0.25);
+    #artistPhotoContainer {
+      padding-right: 0;
+      #artistPhoto {
+        background-size: cover;
+        border: 4px solid white;
+        border-radius: 4px;
+        display: block;
+        padding-bottom: 100%; // 100% rel to width — forces square
+        width: 100%;
+      }
+    }
+    #artistName {
+      font-size: 3em;
+      font-weight: 300;
+      margin-top: 0;
+    }
+    #artistCity {
+      font-weight: 300;
+      margin-bottom: 0.25em;
+    }
+    @media #{ $media-xxs } {
+      #artistName {
+        font-size: 2em;
+      }
+    }
+    @media #{ $media-sm } {
+      #artistName {
+        font-size: 2em;
+      }
+    }
+    @media #{ $media-md } {
+      #artistName {
+        font-size: 3em;
+        font-weight: 100;
+      }
+    }
+    @media #{ $media-lg } {
+      #artistName {
+        font-size: 3.5em;
+        font-weight: 100;
+        margin-top: 0.25em;
+      }
+    }
+  }
+  #artistDescription {
+    color: white;
+    font-weight: 300;
+    margin-top: 1.5em;
+    text-shadow: 0 0 3px transparentize(black, 0.25);
+  }
+}

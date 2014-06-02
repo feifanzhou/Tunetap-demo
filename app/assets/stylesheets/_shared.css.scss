@@ -117,3 +117,13 @@ $media-lg: 'only screen and (min-width: 1200px)';
     margin: 1em 0 0;
   }
 }
+
+#bkg {
+  background-position: 50% 80%;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}

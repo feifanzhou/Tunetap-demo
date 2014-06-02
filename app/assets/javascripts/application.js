@@ -19,5 +19,6 @@ Reaction.Router.initialize({
   '/': 'Root',
   '/fan': 'FanRoot',
   '/venue': 'VenueRoot',
-  '/petition/:id': 'PetitionRoot'
+  '/petition/:id': 'PetitionRoot',
+  '/artist/:id': 'ArtistRoot'
 }, document.getElementById('root'))
