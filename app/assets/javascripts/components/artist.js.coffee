@@ -18,10 +18,65 @@ logic = { id: 6, name: 'Logic', profilePhoto: 'https://scontent-b-iad.xx.fbcdn.n
 kings = { id: 7, name: 'Kings of the City', profilePhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-prn1/t1.0-9/1012372_10151668216408584_253838762_n.jpg', tapCount: 63, bkg: 'kings.jpg' }
 artists = [dylan, reef, blau, kings]
 
+e1 = {
+  name: 'Graduation recital'
+  artist_ids: []
+  coverPhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/10297904_10203623291284840_5421412255088603739_n.jpg'
+  progress: 89.89
+  friends: [4028, 382, 2389, 235, 988]
+  moreFriends: 42
+  peopleCount: 337
+  location: '57 Water Way'
+  time: 'Next Thursday, 7pm'
+}
+e2 = {
+  name: 'Live at The Gates'
+  artist_ids: [1]
+  coverPhoto: 'http://www.wallsave.com/wallpapers/1920x1080/skate/1018922/skate-music-concert-noise-jpg-1018922.jpg'
+  progress: 55.0
+  friends: [293, 85, 998, 50, 2983]
+  moreFriends: 14
+  peopleCount: 83
+  location: 'The Gates'
+  time: 'Next Friday, 10pm'
+}
+e3 = {
+  name: 'East by Northeast'
+  artist_ids: [2, 7]
+  coverPhoto: 'http://sxsw.com/sites/default/files/news/image/outdoor%20stage%204_0.jpg'
+  progress: 212
+  friends: [498, 184, 371, 572, 96]
+  moreFriends: 57
+  peopleCount: 729
+  location: 'Coney Island'
+  time: 'June 12, all day'
+}
+events = [e1, e2, e3]
+
+TD.ArtistEvent = React.createClass
+  render: ->
+    React.DOM.div
+      className: 'ArtistEvent'
+      children: [
+        React.DOM.h2
+          className: 'EventName'
+          children: @props.event.name
+        React.DOM.p
+          className: 'EventDetails'
+          children: @props.event.time + ' | ' + @props.event.peopleCount + ' going including ' + @props.event.moreFriends + ' friends'
+        React.DOM.div
+          className: 'EventProgress'
+          children: Shared.FundingProgress({ progressPercent: @props.event.progress })
+      ]
+
 Reaction.ArtistRoot = React.createClass
   render: ->
     artist = null
     (artist = a if a.id == parseInt(@props.id)) for a in artists
+    artistEvents = []
+    for e in events
+      artistEvents.push(e) if e.artist_ids.indexOf(artist.id) >= 0
+    eventEntries = artistEvents.map (event) -> TD.ArtistEvent({ event: event })
     React.DOM.div
       id: 'artistContent'
       children: [
@@ -85,6 +140,12 @@ Reaction.ArtistRoot = React.createClass
                 React.DOM.div
                   className: 'col-xs-12 col-sm-6'
                   id: 'eventDetails'
-                  children: 'Event details'
+                  children: [
+                    React.DOM.h1
+                      id: 'eventHeading'
+                      children: 'Events'
+                    React.DOM.div
+                      children: eventEntries
+                  ]
               ]
       ]

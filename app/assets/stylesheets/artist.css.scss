@@ -72,4 +72,29 @@
     margin-top: 1.5em;
     text-shadow: 0 0 3px transparentize(black, 0.25);
   }
+  #eventDetails {
+    #eventHeading {
+      font-size: 1.6em;
+      font-weight: 600;
+      margin: 0 auto 0.5em auto;
+    }
+    .ArtistEvent {
+      border-top: 1px solid transparentize(white, 0.75);
+      margin-bottom: 1.5em;
+      padding-top: 0.5em;
+      .EventName {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin: 0 auto 0.25em 0;
+      }
+      .EventDetails {
+        font-weight: 300;
+        margin-bottom: 0.75em;
+      }
+      .ProgressContainer {
+        border-radius: 0;
+        height: 0.4em;
+      }
+    }
+  }
 }

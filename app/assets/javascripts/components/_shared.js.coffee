@@ -108,6 +108,9 @@ Shared.EventCard = React.createClass
                 React.DOM.h2
                   className: 'DemoCardName col-xs-12'
                   children: @props.event.name
+                React.DOM.h2
+                  className: 'DemoCardSubname col-xs-12'
+                  children: if @props.artistNames && typeof @props.artistNames != 'undefined' then 'Feat. ' + @props.artistNames else ''
                 React.DOM.div
                   className: 'EventCardProgress col-xs-12'
                   children: Shared.FundingProgress({ progressPercent: @props.event.progress })

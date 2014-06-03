@@ -122,6 +122,7 @@ artists = [dylan, reef, blau, kings]
 
 e1 = {
   name: 'Graduation recital'
+  artist_ids: []
   coverPhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/10297904_10203623291284840_5421412255088603739_n.jpg'
   progress: 89.89
   friends: [4028, 382, 2389, 235, 988]
@@ -169,13 +170,29 @@ TD.SearchResults = React.createClass
         React.DOM.p
           className: 'col-xs-12 SearchResults'
           children: 'Search is currently not available in this demo. But you can probably imagine how it works :)'
+artistNamesForEvent = (event) ->
+  artistIDs = event.artist_ids
+  namesArray = []
+  artistNames = ''
+  for id in artistIDs
+    for a in artists
+      namesArray.push(a.name) if a.id == id
+  if namesArray.length == 1
+    artistNames = namesArray[0]
+  else
+    for name, i in namesArray
+      if i < namesArray.length - 1
+        artistNames += (name + ', ')
+      else
+        artistNames += ('and ' + name)
+  return artistNames
 TD.EventsOnTap = React.createClass
   render: ->
     React.DOM.div
       className: 'row'
       id: 'eventsOnTapContainer'
       children: events.map( (event) ->
-        return window.Shared.EventCard({ event: event })
+        return window.Shared.EventCard({ event: event, artistNames: artistNamesForEvent(event) })
       )
 TD.ConfirmedEvents = React.createClass
   render: ->
@@ -183,7 +200,7 @@ TD.ConfirmedEvents = React.createClass
       className: 'row'
       id: 'confirmedEventsContainer'
       children: confirmedEvents.map( (event) ->
-        return Shared.EventCard({ event: event })
+        return Shared.EventCard({ event: event, artistNames: artistNamesForEvent(event) })
       )
 TD.FeaturedArtists = React.createClass
   render: ->
