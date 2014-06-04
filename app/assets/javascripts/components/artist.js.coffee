@@ -19,6 +19,7 @@ kings = { id: 7, name: 'Kings of the City', profilePhoto: 'https://scontent-a-ia
 artists = [dylan, reef, blau, kings]
 
 e1 = {
+  id: 1
   name: 'Graduation recital'
   artist_ids: []
   coverPhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/10297904_10203623291284840_5421412255088603739_n.jpg'
@@ -30,6 +31,7 @@ e1 = {
   time: 'Next Thursday, 7pm'
 }
 e2 = {
+  id: 2
   name: 'Live at The Gates'
   artist_ids: [1]
   coverPhoto: 'http://www.wallsave.com/wallpapers/1920x1080/skate/1018922/skate-music-concert-noise-jpg-1018922.jpg'
@@ -41,6 +43,7 @@ e2 = {
   time: 'Next Friday, 10pm'
 }
 e3 = {
+  id: 3
   name: 'East by Northeast'
   artist_ids: [2, 7]
   coverPhoto: 'http://sxsw.com/sites/default/files/news/image/outdoor%20stage%204_0.jpg'
@@ -55,19 +58,23 @@ events = [e1, e2, e3]
 
 TD.ArtistEvent = React.createClass
   render: ->
-    React.DOM.div
-      className: 'ArtistEvent'
-      children: [
-        React.DOM.h2
-          className: 'EventName'
-          children: @props.event.name
-        React.DOM.p
-          className: 'EventDetails'
-          children: @props.event.time + ' | ' + @props.event.peopleCount + ' going including ' + @props.event.moreFriends + ' friends'
+    React.DOM.a
+      className: 'ArtistEventLink'
+      href: '/event/' + @props.event.id
+      children:
         React.DOM.div
-          className: 'EventProgress'
-          children: Shared.FundingProgress({ progressPercent: @props.event.progress })
-      ]
+          className: 'ArtistEvent'
+          children: [
+            React.DOM.h2
+              className: 'EventName'
+              children: @props.event.name
+            React.DOM.p
+              className: 'EventDetails'
+              children: @props.event.time + ' | ' + @props.event.peopleCount + ' going including ' + @props.event.moreFriends + ' friends'
+            React.DOM.div
+              className: 'EventProgress'
+              children: Shared.FundingProgress({ progressPercent: @props.event.progress })
+          ]
 
 Reaction.ArtistRoot = React.createClass
   render: ->

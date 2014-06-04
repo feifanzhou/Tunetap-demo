@@ -121,6 +121,7 @@ kings = { id: 7, name: 'Kings of the City', profilePhoto: 'https://scontent-a-ia
 artists = [dylan, reef, blau, kings]
 
 e1 = {
+  id: 1
   name: 'Graduation recital'
   artist_ids: []
   coverPhoto: 'https://scontent-a-iad.xx.fbcdn.net/hphotos-ash3/t1.0-9/10297904_10203623291284840_5421412255088603739_n.jpg'
@@ -132,6 +133,7 @@ e1 = {
   time: 'Next Thursday, 7pm'
 }
 e2 = {
+  id: 2
   name: 'Live at The Gates'
   artist_ids: [1]
   coverPhoto: 'http://www.wallsave.com/wallpapers/1920x1080/skate/1018922/skate-music-concert-noise-jpg-1018922.jpg'
@@ -143,6 +145,7 @@ e2 = {
   time: 'Next Friday, 10pm'
 }
 e3 = {
+  id: 3
   name: 'East by Northeast'
   artist_ids: [2, 7]
   coverPhoto: 'http://sxsw.com/sites/default/files/news/image/outdoor%20stage%204_0.jpg'

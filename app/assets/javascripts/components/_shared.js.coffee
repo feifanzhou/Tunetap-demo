@@ -143,8 +143,10 @@ Shared.EventCard = React.createClass
                 React.DOM.div
                   className: 'col-xs-12'
                   children:
-                    React.DOM.button
+                    React.DOM.a
                       className: 'btn btn-primary EventCardTicketButton'
+                      role: 'button'
+                      href: '/event/' + @props.event.id
                       children: 'Grab a ticket'
               ]
           ]
