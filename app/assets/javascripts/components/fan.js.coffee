@@ -159,12 +159,6 @@ e3 = {
 events = [e1, e2]
 confirmedEvents = [e3]
 
-demoString = 'This is an interactive demo. '
-if Util.hasLocalStorage()
-  demoString += 'Your changes will be saved, but they will not be reflected on the live site.'
-else 
-  demoString += "Your changes will not be saved because your browser doesn't support saving changes."
-
 TD.SearchResults = React.createClass
   render: ->
     React.DOM.div
@@ -212,7 +206,7 @@ TD.FeaturedArtists = React.createClass
       className: 'row'
       id: 'featuredArtistsContainer'
       children: artists.map((artist) ->
-        return Shared.ArtistCard({ artist: artist, tapAction: tapAction })
+        return Shared.ArtistCard({ artist: artist, tapAction: tapAction, shouldBeSmall: false })
       )
 TD.FriendActivity = React.createClass
   render: ->
@@ -222,14 +216,6 @@ TD.FriendActivity = React.createClass
         React.DOM.p
           className: 'col-xs-12 FriendResults'
           children: "We're working on this, but nothing here yet"
-TD.DemoDisclaimer = React.createClass
-  render: ->
-    React.DOM.aside
-      className: 'text-center'
-      id: 'demoDisclaimer'
-      children:
-        React.DOM.p
-          children: demoString
 TD.ArtistList = React.createClass
   render: ->
     clickHandler = @props.didClickResult
@@ -352,38 +338,50 @@ TD.BrowseEvents = React.createClass
                           id: 'navigatorSearch'
                           type: 'search'
                           placeholder: 'Find events and artists'
-                    React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'ontap' then ' Selected' else '')
-                      id: 'eventsOnTap'
-                      onClick: @navigate
-                      'data-target': 'ontap'
-                      children:
-                        React.DOM.p
-                          children: 'Events on tap'
-                    React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'confirmed' then ' Selected' else '')
-                      id: 'confirmedEvents'
-                      onClick: @navigate
-                      'data-target': 'confirmed'
-                      children:
-                        React.DOM.p
-                          children: 'Confirmed events'
-                    React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'feat' then ' Selected' else '')
-                      id: 'featuredArtists'
-                      onClick: @navigate
-                      'data-target': 'feat'
-                      children:
-                        React.DOM.p
-                          children: 'Featured artists'
-                    React.DOM.div
-                      className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'friends' then ' Selected' else '')
-                      id: 'friends'
-                      onClick: @navigate
-                      'data-target': 'friends'
-                      children:
-                        React.DOM.p
-                          children: 'Friends'
+                    React.DOM.a
+                      href: '#ontap'
+                      children: 
+                        React.DOM.div
+                          className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'ontap' then ' Selected' else '')
+                          id: 'eventsOnTap'
+                          onClick: @navigate
+                          'data-target': 'ontap'
+                          children:
+                            React.DOM.p
+                              children: 'Events on tap'
+                    React.DOM.a
+                      href: '#confirmed'
+                      children: 
+                        React.DOM.div
+                          className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'confirmed' then ' Selected' else '')
+                          id: 'confirmedEvents'
+                          onClick: @navigate
+                          'data-target': 'confirmed'
+                          children:
+                            React.DOM.p
+                              children: 'Confirmed events'
+                    React.DOM.a
+                      href: '#featured'
+                      children: 
+                        React.DOM.div
+                          className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'feat' then ' Selected' else '')
+                          id: 'featuredArtists'
+                          onClick: @navigate
+                          'data-target': 'feat'
+                          children:
+                            React.DOM.p
+                              children: 'Featured artists'
+                    React.DOM.a
+                      href: '#friends'
+                      children: 
+                        React.DOM.div
+                          className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'friends' then ' Selected' else '')
+                          id: 'friends'
+                          onClick: @navigate
+                          'data-target': 'friends'
+                          children:
+                            React.DOM.p
+                              children: 'Friends'
                   ]
             React.DOM.section
               className: 'col-xs-12 col-sm-3'
@@ -431,7 +429,7 @@ Reaction.FanRoot = React.createClass
   render: ->
     React.DOM.div
       children: [
-        TD.DemoDisclaimer()
+        Shared.DemoDisclaimer()
         TD.TapThat()
         React.DOM.div
           className: 'container'

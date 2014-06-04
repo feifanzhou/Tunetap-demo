@@ -71,74 +71,78 @@ Reaction.EventRoot = React.createClass
         artist = a if a.id == aid
       return if artist == null
       React.DOM.img
-        className: 'ArtistCard ' + artistCardClass
+        className: 'EventArtistCard ' + artistCardClass
         style: { backgroundImage: 'url(' + artist.profilePhoto + ')' }
     )
     React.DOM.div
-      className: 'container'
-      children:
+      children: [
+        Shared.DemoDisclaimer()
         React.DOM.div
-          className: 'row'
-          children: [
-            React.DOM.section
-              className: 'col-xs-12 col-sm-8'
+          className: 'container EventContainer'
+          children:
+            React.DOM.div
+              className: 'row'
               children: [
-                React.DOM.h1
-                  id: 'eventName'
-                  children: event.name
-                React.DOM.p
-                  id: 'eventTimeAndPlace'
-                  children: event.time + ', ' + event.location
-                Shared.FundingProgress({ progressPercent: event.progress })
-                React.DOM.div
-                  className: 'row'
-                  id: 'tickets'
+                React.DOM.section
+                  className: 'col-xs-12 col-sm-8'
+                  children: [
+                    React.DOM.h1
+                      id: 'eventName'
+                      children: event.name
+                    React.DOM.p
+                      id: 'eventTimeAndPlace'
+                      children: event.time + ', ' + event.location
+                    Shared.FundingProgress({ progressPercent: event.progress })
+                    React.DOM.div
+                      className: 'row'
+                      id: 'tickets'
+                      children: [
+                        React.DOM.h2
+                          className: 'col-xs-12'
+                          children: 'Grab a ticket'
+                        React.DOM.div
+                          className: 'col-xs-6'
+                          children: 
+                            React.DOM.button
+                              className: 'btn btn-primary'
+                              children: [
+                                React.DOM.h3
+                                  className: 'TicketName'
+                                  children: 'General admission'
+                                React.DOM.p
+                                  className: 'TicketPrice'
+                                  children: '$10.00'
+                              ]
+                        React.DOM.div
+                          className: 'col-xs-6'
+                          children:
+                            React.DOM.button
+                              className: 'btn btn-primary'
+                              children: [
+                                React.DOM.h3
+                                  className: 'TicketName'
+                                  children: 'VIP package'
+                                React.DOM.p
+                                  className: 'TicketPrice'
+                                  children: 'Name your price (min $20)'
+                              ]
+                      ]
+                    React.DOM.p
+                      children: 'Let your friends know! For every person that buys a ticket from your referral, you will receive $1 in credit, up to the price of your ticket'
+                    React.DOM.p
+                      children: 'No hidden charges or service fees. Once the transaction goes through, your tickets will immediately be available online and by email.'
+                  ]
+                React.DOM.section
+                  className: 'col-xs-12 col-sm-4'
                   children: [
                     React.DOM.h2
-                      className: 'col-xs-12'
-                      children: 'Grab a ticket'
+                      children: 'Featuring'
                     React.DOM.div
-                      className: 'col-xs-6'
-                      children: 
-                        React.DOM.button
-                          className: 'btn btn-primary'
-                          children: [
-                            React.DOM.h3
-                              className: 'TicketName'
-                              children: 'General admission'
-                            React.DOM.p
-                              className: 'TicketPrice'
-                              children: '$10.00'
-                          ]
+                      children: artistCards
+                    React.DOM.h2
+                      children: 'People going'
                     React.DOM.div
-                      className: 'col-xs-6'
-                      children:
-                        React.DOM.button
-                          className: 'btn btn-primary'
-                          children: [
-                            React.DOM.h3
-                              className: 'TicketName'
-                              children: 'VIP package'
-                            React.DOM.p
-                              className: 'TicketPrice'
-                              children: 'Name your price (min $20)'
-                          ]
+                      children: 'People cards'
                   ]
-                React.DOM.p
-                  children: 'Let your friends know! For every person that buys a ticket from your referral, you will receive $1 in credit, up to the price of your ticket'
-                React.DOM.p
-                  children: 'No hidden charges or service fees. Once the transaction goes through, your tickets will immediately be available online and by email.'
               ]
-            React.DOM.section
-              className: 'col-xs-12 col-sm-4'
-              children: [
-                React.DOM.h2
-                  children: 'Featuring'
-                React.DOM.div
-                  children: artistCards
-                React.DOM.h2
-                  children: 'People going'
-                React.DOM.div
-                  children: 'People cards'
-              ]
-          ]
+      ]

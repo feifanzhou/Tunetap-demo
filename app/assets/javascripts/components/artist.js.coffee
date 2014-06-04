@@ -85,74 +85,78 @@ Reaction.ArtistRoot = React.createClass
       artistEvents.push(e) if e.artist_ids.indexOf(artist.id) >= 0
     eventEntries = artistEvents.map (event) -> TD.ArtistEvent({ event: event })
     React.DOM.div
-      id: 'artistContent'
       children: [
+        Shared.DemoDisclaimer()
         React.DOM.div
-          id: 'bkg'
-          style: { backgroundImage: 'url(/assets/' + artist.bkg + ')' }
-        React.DOM.div
-          id: 'bkgGrad'
-        React.DOM.div
-          className: 'container'
-          id: 'artistContainer'
-          children:
+          id: 'artistContent'
+          children: [
             React.DOM.div
-              className: 'row'
-              children: [
+              id: 'bkg'
+              style: { backgroundImage: 'url(/assets/' + artist.bkg + ')' }
+            React.DOM.div
+              id: 'bkgGrad'
+            React.DOM.div
+              className: 'container'
+              id: 'artistContainer'
+              children:
                 React.DOM.div
-                  className: 'col-xs-12 col-sm-6'
-                  id: 'artistDetails'
+                  className: 'row'
                   children: [
                     React.DOM.div
-                      className: 'row'
-                      id: 'artistProfile'
+                      className: 'col-xs-12 col-sm-6'
+                      id: 'artistDetails'
                       children: [
                         React.DOM.div
-                          className: 'col-xs-3'
-                          id: 'artistPhotoContainer'
-                          children: 
-                            React.DOM.img
-                              id: 'artistPhoto'
-                              style: { backgroundImage: 'url(' + artist.profilePhoto + ')' }
-                        React.DOM.div
-                          className: 'col-xs-9'
+                          className: 'row'
+                          id: 'artistProfile'
                           children: [
-                            React.DOM.h1
-                              id: 'artistName'
-                              children: artist.name
-                            React.DOM.p
-                              id: 'artistCity'
-                              children: 'New York City'
-                            React.DOM.p
-                              id: 'artistSocial'
-                              children: 'Twitter | Instagram | Facebook'
+                            React.DOM.div
+                              className: 'col-xs-3'
+                              id: 'artistPhotoContainer'
+                              children: 
+                                React.DOM.img
+                                  id: 'artistPhoto'
+                                  style: { backgroundImage: 'url(' + artist.profilePhoto + ')' }
+                            React.DOM.div
+                              className: 'col-xs-9'
+                              children: [
+                                React.DOM.h1
+                                  id: 'artistName'
+                                  children: artist.name
+                                React.DOM.p
+                                  id: 'artistCity'
+                                  children: 'New York City'
+                                React.DOM.p
+                                  id: 'artistSocial'
+                                  children: 'Twitter | Instagram | Facebook'
+                              ]
                           ]
+                        React.DOM.div
+                          className: 'row'
+                          children: 
+                            React.DOM.div
+                              className: 'col-xs-12'
+                              children:
+                                React.DOM.p
+                                  id: 'artistDescription'
+                                  children: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, ratione, doloribus quos enim voluptas harum fugit molestias ipsam maiores aspernatur distinctio iusto nostrum fugiat provident maxime obcaecati repellendus placeat repellat?'
+                        React.DOM.div
+                          className: 'row'
+                          children:
+                            React.DOM.div
+                              className: 'col-xs-12'
+                              children: 'Sounds'
                       ]
                     React.DOM.div
-                      className: 'row'
-                      children: 
+                      className: 'col-xs-12 col-sm-6'
+                      id: 'eventDetails'
+                      children: [
+                        React.DOM.h1
+                          id: 'eventHeading'
+                          children: 'Events'
                         React.DOM.div
-                          className: 'col-xs-12'
-                          children:
-                            React.DOM.p
-                              id: 'artistDescription'
-                              children: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, ratione, doloribus quos enim voluptas harum fugit molestias ipsam maiores aspernatur distinctio iusto nostrum fugiat provident maxime obcaecati repellendus placeat repellat?'
-                    React.DOM.div
-                      className: 'row'
-                      children:
-                        React.DOM.div
-                          className: 'col-xs-12'
-                          children: 'Sounds'
+                          children: eventEntries
+                      ]
                   ]
-                React.DOM.div
-                  className: 'col-xs-12 col-sm-6'
-                  id: 'eventDetails'
-                  children: [
-                    React.DOM.h1
-                      id: 'eventHeading'
-                      children: 'Events'
-                    React.DOM.div
-                      children: eventEntries
-                  ]
-              ]
+          ]
       ]

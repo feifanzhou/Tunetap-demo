@@ -7,6 +7,20 @@ else
   React = window.React
   Reaction = window.Reaction
 
+demoString = 'This is an interactive demo. '
+if Util.hasLocalStorage()
+  demoString += 'Your changes will be saved, but they will not be reflected on the live site.'
+else 
+  demoString += "Your changes will not be saved because your browser doesn't support saving changes."
+Shared.DemoDisclaimer = React.createClass
+  render: ->
+    React.DOM.aside
+      className: 'text-center'
+      id: 'demoDisclaimer'
+      children:
+        React.DOM.p
+          children: demoString
+
 Reaction.Error404 = React.createClass
   render: ->
     React.DOM.p

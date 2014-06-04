@@ -4,7 +4,7 @@
   font-size: 2.5em;
   font-weight: 400;
 }
-p {
+.EventContainer p {
   font-weight: 300;
 }
 .ProgressContainer {
@@ -19,7 +19,7 @@ p {
     width: 100%;
   }
 }
-.ArtistCard {
+.EventArtistCard {
   @include vendor-prefix(background-size, cover);
   padding-bottom: 50%;
   width: 50%;

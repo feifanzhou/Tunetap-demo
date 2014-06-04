@@ -40,6 +40,15 @@ $media-lg: 'only screen and (min-width: 1200px)';
   height: 0.6em;
 }
 
+#demoDisclaimer {
+  color: $orange;
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.15em;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+}
+
 @mixin DemoCard {
   .DemoCardContent {
     border: 1px solid #DDD;
