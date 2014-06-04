@@ -182,7 +182,12 @@ body {
   }
   #petitionContent {
     background: transparentize(black, 0.5);
-    border-radius: 0.5em;
+    @media #{ $media-xxs } {
+      border-radius: 0;
+    }
+    @media #{ $media-sm } {
+      border-radius: 0.5em;
+    }
     color: white;
     padding: 3em 1em 2em 1em;
     position: relative;
