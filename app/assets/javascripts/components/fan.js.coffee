@@ -183,6 +183,32 @@ artistNamesForEvent = (event) ->
       else
         artistNames += ('and ' + name)
   return artistNames
+TD.Petitions = React.createClass
+  supportPetition: (event) ->
+    console.log('Support petition')
+    targetPetitionID = parseInt(event.target.getAttribute('data-petition-id'), 10)
+    petitionsText = localStorage.getItem('petitions')
+    petitions = if petitionsText && typeof petitionsText != 'undefined' then JSON.parse(petitionsText) else []
+    newPetitions = []
+    for p in petitions
+      if p.id != targetPetitionID
+        newPetitions.push(p)
+        continue
+      newP = { id: p.id, artist: p.artist, city: p.city, count: p.count++ }
+      newPetitions.push(newP)
+    localStorage.setItem('petitions', JSON.stringify(petitions))
+    Reaction.Router.linkTo('/petition/' + targetPetitionID)
+
+  render: ->
+    supportAction = @supportPetition
+    console.log('support petition action: ' + @supportPetition)
+    petitionsText = localStorage.getItem('petitions')
+    petitions = if petitionsText && typeof petitionsText != 'undefined' then JSON.parse(petitionsText) else []
+    React.DOM.div
+      className: 'row'
+      children: petitions.map( (petition) ->
+        return Shared.PetitionCard({ petition: petition, supportPetition: supportAction })
+      )
 TD.EventsOnTap = React.createClass
   render: ->
     React.DOM.div
@@ -339,6 +365,17 @@ TD.BrowseEvents = React.createClass
                           type: 'search'
                           placeholder: 'Find events and artists'
                     React.DOM.a
+                      href: '#petitions'
+                      children:
+                        React.DOM.div
+                          className: 'NavigatorSection col-xs-3 col-sm-12' + (if @props.nav == 'petitions' then ' Selected' else '')
+                          id: 'petitions'
+                          onClick: @navigate
+                          'data-target': 'petitions'
+                          children:
+                            React.DOM.p
+                              children: 'Petitions'
+                    React.DOM.a
                       href: '#ontap'
                       children: 
                         React.DOM.div
@@ -392,6 +429,8 @@ TD.BrowseEvents = React.createClass
               id: 'browseContent'
               children: (if @props.nav == 'search'
                            TD.SearchResults()
+                         else if @props.nav == 'petitions'
+                           TD.Petitions()
                          else if @props.nav == 'ontap' 
                            TD.EventsOnTap() 
                          else if @props.nav == 'confirmed'

@@ -164,5 +164,35 @@ Shared.EventCard = React.createClass
                       children: 'Grab a ticket'
               ]
           ]
+Shared.PetitionCard = React.createClass
+  render: ->
+    React.DOM.div
+      className: 'PetitionCard DemoCard col-xs-12 col-sm-6 col-md-4'
+      children:
+        React.DOM.div
+          className: 'DemoCardContent'
+          children: [
+            React.DOM.div
+              className: 'DemoCardBody row'
+              children: [
+                React.DOM.h2
+                  className: 'DemoCardName col-xs-12'
+                  children: @props.petition.artist + ' for ' + @props.petition.city
+                React.DOM.p
+                  className: 'DemoCardSubname col-xs-12'
+                  children: 'Unconfirmed'
+                React.DOM.p
+                  className: 'EventCardPeopleCount col-xs-12'
+                  children: @props.petition.count + ' people supporting this petition so far'
+                React.DOM.div
+                  className: 'col-xs-12'
+                  children:
+                    React.DOM.button
+                      className: 'btn btn-primary PetitionCardActionButton'
+                      'data-petition-id': @props.petition.id
+                      onClick: @props.supportPetition
+                      children: 'Support this petition'
+              ]
+          ]
 
 module.exports = window.Shared if typeof module != 'undefined'
